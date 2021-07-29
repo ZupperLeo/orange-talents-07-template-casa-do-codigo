@@ -1,9 +1,13 @@
 package br.com.zupacademy.leonardo.casadocodigo.repository;
 
 import br.com.zupacademy.leonardo.casadocodigo.model.Autor;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface AutorRepository extends JpaRepository<Autor, Long> {
+import java.util.Optional;
 
-    String findByNome(String nome);
+@Repository
+public interface AutorRepository extends CrudRepository<Autor, Long> {
+
+    Optional<Autor> findByEmail(String email);
 }

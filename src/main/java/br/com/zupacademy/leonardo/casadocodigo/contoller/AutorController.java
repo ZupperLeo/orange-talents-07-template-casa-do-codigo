@@ -5,10 +5,8 @@ import br.com.zupacademy.leonardo.casadocodigo.model.Autor;
 import br.com.zupacademy.leonardo.casadocodigo.repository.AutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -19,10 +17,18 @@ public class AutorController {
 
     @Autowired
     private AutorRepository repository;
+    @Autowired
+    private ProibiEmailDuplicadoAutorValidator proibiEmailDuplicadoAutorValidator;
+
+    @InitBinder
+    public void init(WebDataBinder binder) {
+        binder.addValidators(proibiEmailDuplicadoAutorValidator);
+    }
 
     @PostMapping
     @Transactional
     public ResponseEntity<Autor> cadastrar(@RequestBody @Valid AutorDTO autorDTO) {
+
         Autor autor = autorDTO.converte();
         repository.save(autor);
 
