@@ -17,13 +17,6 @@ public class AutorController {
 
     @Autowired
     private AutorRepository repository;
-    @Autowired
-    private ProibiEmailDuplicadoAutorValidator proibiEmailDuplicadoAutorValidator;
-
-    @InitBinder
-    public void init(WebDataBinder binder) {
-        binder.addValidators(proibiEmailDuplicadoAutorValidator);
-    }
 
     @PostMapping
     @Transactional

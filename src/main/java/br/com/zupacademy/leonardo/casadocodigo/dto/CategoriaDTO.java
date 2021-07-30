@@ -1,12 +1,15 @@
 package br.com.zupacademy.leonardo.casadocodigo.dto;
 
 import br.com.zupacademy.leonardo.casadocodigo.model.Categoria;
+import br.com.zupacademy.leonardo.casadocodigo.validator.UniqueValue;
 
 import javax.validation.constraints.NotBlank;
 
 public class CategoriaDTO {
 
-    private @NotBlank String nome;
+    @NotBlank
+    @UniqueValue(domainClass = Categoria.class, fieldName = "nome")
+    private String nome;
 
     @Deprecated
     public CategoriaDTO() {}

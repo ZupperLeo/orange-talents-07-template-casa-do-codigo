@@ -18,14 +18,6 @@ public class CategoriasController {
     @Autowired
     private CategoriaRepository repository;
 
-    @Autowired
-    private ProibeNomeCategoriaRepetido proibeNomeCategoriaRepetido;
-
-    @InitBinder
-    public void init(WebDataBinder binder) {
-        binder.addValidators(proibeNomeCategoriaRepetido);
-    }
-
     @PostMapping
     @Transactional
     public ResponseEntity<Categoria> criarCategoria(@RequestBody @Valid CategoriaDTO categoriaDTO) {

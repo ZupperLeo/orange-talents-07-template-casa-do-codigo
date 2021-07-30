@@ -1,14 +1,21 @@
 package br.com.zupacademy.leonardo.casadocodigo.dto;
 
 import br.com.zupacademy.leonardo.casadocodigo.model.Autor;
+import br.com.zupacademy.leonardo.casadocodigo.validator.UniqueValue;
 
 import javax.validation.constraints.*;
 
 public class AutorDTO {
 
-    private @NotBlank String nome;
-    private @NotBlank @Email String email;
-    private @NotBlank @Size(max = 400) String descricao;
+    @NotBlank
+    private String nome;
+    @NotBlank
+    @Email
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
+    private String email;
+    @NotBlank
+    @Size(max = 400)
+    private String descricao;
 
     public AutorDTO(@NotBlank String nome, @NotBlank @Email String email,
                     @NotBlank @Size(max = 400) String descricao) {
